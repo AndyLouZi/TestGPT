@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vue 靜態購物網站</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="src/styles.css" />
+</head>
+<body>
+  <div id="app">
+    <header class="hero">
+      <div class="hero__content">
+        <p class="eyebrow">Vue 靜態範例</p>
+        <h1>購物網站雛形</h1>
+        <p class="lead">
+          參考購物網站架構圖，預先寫死的商品、會員與管理員流程，方便展示資訊架構與元件區塊。
+        </p>
+        <div class="hero__actions">
+          <button class="primary">開始選購</button>
+          <button class="ghost">瞭解架構</button>
+        </div>
+        <div class="hero__stats">
+          <div>
+            <h3>{{ products.length }}</h3>
+            <p>特色商品</p>
+          </div>
+          <div>
+            <h3>{{ totalNodes }}</h3>
+            <p>流程節點</p>
+          </div>
+          <div>
+            <h3>{{ memberBadges.length }}</h3>
+            <p>會員專屬標籤</p>
+          </div>
+        </div>
+      </div>
+      <div class="hero__panel">
+        <h3>購物網站架構一覽</h3>
+        <ul>
+          <li v-for="section in structure" :key="section.name">
+            <div class="node">{{ section.name }}</div>
+            <ul>
+              <li v-for="flow in section.flows" :key="flow.name">
+                <div class="node node--light">{{ flow.name }}</div>
+                <ul>
+                  <li v-for="page in flow.pages" :key="page" class="chip">{{ page }}</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </header>
+
+    <main>
+      <section class="section">
+        <div class="section__header">
+          <div>
+            <p class="eyebrow">分類導覽</p>
+            <h2>以 Vue 呈現靜態資料</h2>
+          </div>
+          <button class="link">檢視所有流程</button>
+        </div>
+        <div class="grid grid--3">
+          <article v-for="category in categories" :key="category.name" class="card">
+            <div class="card__header">
+              <div class="icon">{{ category.icon }}</div>
+              <div>
+                <h3>{{ category.name }}</h3>
+                <p>{{ category.description }}</p>
+              </div>
+            </div>
+            <ul class="pill-list">
+              <li v-for="feature in category.features" :key="feature">{{ feature }}</li>
+            </ul>
+            <div class="meta">責任人：{{ category.owner }}</div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section__header">
+          <div>
+            <p class="eyebrow">會員體驗</p>
+            <h2>會員專屬標籤與任務</h2>
+          </div>
+          <button class="link">查看任務</button>
+        </div>
+        <div class="grid grid--4">
+          <article v-for="badge in memberBadges" :key="badge.title" class="card card--soft">
+            <h4>{{ badge.title }}</h4>
+            <p>{{ badge.desc }}</p>
+            <span class="tag">{{ badge.level }}</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section__header">
+          <div>
+            <p class="eyebrow">精選商品</p>
+            <h2>立即可以展示的靜態商品卡片</h2>
+          </div>
+          <button class="link">更多商品</button>
+        </div>
+        <div class="grid grid--3">
+          <article v-for="product in products" :key="product.name" class="card product">
+            <div class="product__header">
+              <div>
+                <h3>{{ product.name }}</h3>
+                <p>{{ product.subtitle }}</p>
+              </div>
+              <div class="price">{{ product.price }}</div>
+            </div>
+            <p class="product__desc">{{ product.description }}</p>
+            <div class="pill-list">
+              <span v-for="tag in product.tags" :key="tag" class="pill">{{ tag }}</span>
+            </div>
+            <div class="product__footer">
+              <button class="primary">加入購物車</button>
+              <button class="ghost">收藏</button>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div>
+        <h4>購物網站雛形</h4>
+        <p>以 Vue 單頁展示靜態資料，便於快速分享設計想法與流程。</p>
+      </div>
+      <div class="footer__links">
+        <a href="#">使用條款</a>
+        <a href="#">隱私政策</a>
+        <a href="#">聯絡我們</a>
+      </div>
+    </footer>
+  </div>
+
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>
