@@ -10,15 +10,7 @@
   <link rel="stylesheet" href="src/styles.css" />
 </head>
 <body>
-  <div id="app" v-cloak>
-    <nav class="topbar">
-      <div class="brand">Vue 購物示範</div>
-      <div class="cart">
-        <span class="pill pill--solid">🛒 購物車 {{ cartCount }} 件</span>
-        <small class="cart__hint" v-if="lastAction">{{ lastAction }}</small>
-      </div>
-    </nav>
-
+  <div id="app">
     <header class="hero">
       <div class="hero__content">
         <p class="eyebrow">Vue 靜態範例</p>
@@ -128,33 +120,11 @@
               <span v-for="tag in product.tags" :key="tag" class="pill">{{ tag }}</span>
             </div>
             <div class="product__footer">
-              <button class="primary" @click="addToCart(product)">加入購物車</button>
+              <button class="primary">加入購物車</button>
               <button class="ghost">收藏</button>
             </div>
           </article>
         </div>
-      </section>
-
-      <section class="section">
-        <div class="section__header">
-          <div>
-            <p class="eyebrow">購物車狀態</p>
-            <h2>目前選擇的商品</h2>
-          </div>
-          <span class="pill">合計 {{ cartCount }} 件</span>
-        </div>
-        <div class="cart-panel" v-if="cartItems.length">
-          <ul>
-            <li v-for="item in cartItems" :key="item.id" class="cart-panel__item">
-              <div>
-                <div class="cart-panel__name">{{ item.name }}</div>
-                <div class="cart-panel__meta">加入時間：{{ item.addedAt }}</div>
-              </div>
-              <span class="pill">{{ item.price }}</span>
-            </li>
-          </ul>
-        </div>
-        <p class="empty" v-else>尚未加入商品，點擊「加入購物車」即可看到更新。</p>
       </section>
     </main>
 
@@ -170,7 +140,7 @@
       </div>
     </footer>
   </div>
-  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js" defer></script>
-  <script src="src/app.js" defer></script>
+
+  <script type="module" src="src/app.js"></script>
 </body>
 </html>

@@ -1,3 +1,5 @@
+import { createApp, computed } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
+
 const structure = [
   {
     name: '管理員系統',
@@ -78,29 +80,14 @@ const products = [
   },
 ]
 
-const app = Vue.createApp({
+createApp({
   setup() {
-    const totalNodes = Vue.computed(() =>
+    const totalNodes = computed(() =>
       structure.reduce(
         (total, section) => total + section.flows.reduce((sum, flow) => sum + flow.pages.length + 1, 1),
         0,
-      ),
+      )
     )
-
-    const cartItems = Vue.reactive([])
-    const lastAction = Vue.ref('')
-
-    const cartCount = Vue.computed(() => cartItems.length)
-
-    const addToCart = (product) => {
-      const now = new Date()
-      cartItems.push({
-        ...product,
-        id: `${product.name}-${now.getTime()}`,
-        addedAt: now.toLocaleTimeString('zh-TW', { hour12: false }),
-      })
-      lastAction.value = `${product.name} 已加入購物車！`
-    }
 
     return {
       structure,
@@ -108,12 +95,6 @@ const app = Vue.createApp({
       memberBadges,
       products,
       totalNodes,
-      cartItems,
-      cartCount,
-      addToCart,
-      lastAction,
     }
   },
-})
-
-app.mount('#app')
+}).mount('#app')
